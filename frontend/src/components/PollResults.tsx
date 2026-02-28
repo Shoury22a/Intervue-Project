@@ -7,7 +7,7 @@ interface PollResultsProps {
 
 export default function PollResults({ poll, highlightIndex }: PollResultsProps) {
     const totalVotes = poll.options.reduce((sum, o) => sum + o.votes, 0);
-    const labels = ['A', 'B', 'C', 'D', 'E', 'F'];
+    const labels = ['1', '2', '3', '4', '5', '6'];
 
     return (
         <div className="poll-results">

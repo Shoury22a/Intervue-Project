@@ -13,7 +13,7 @@ export default function TeacherView() {
     const navigate = useNavigate();
     const { connected, activePoll, students, messages, createPoll, endPoll, kickStudent, sendMessage } = useTeacherSocket();
     const [tab, setTab] = useState<Tab>('poll');
-    const [sidebarTab, setSidebarTab] = useState<SidebarTab>('participants');
+    const [sidebarTab, setSidebarTab] = useState<SidebarTab>('chat');
     const [showCreateForm, setShowCreateForm] = useState(false);
     const [historyPolls, setHistoryPolls] = useState<any[]>([]);
     const [loadingHistory, setLoadingHistory] = useState(false);
@@ -142,15 +142,17 @@ export default function TeacherView() {
                     {/* Sidebar */}
                     <aside className="teacher-sidebar">
                         <div className="sidebar-tabs">
-                            <button className={`sidebar-tab ${sidebarTab === 'participants' ? 'active' : ''}`} onClick={() => setSidebarTab('participants')}>
-                                Participants ({students.length})
-                            </button>
                             <button className={`sidebar-tab ${sidebarTab === 'chat' ? 'active' : ''}`} onClick={() => setSidebarTab('chat')}>
                                 Chat {messages.length > 0 && <span className="badge">{messages.length}</span>}
                             </button>
+                            <button className={`sidebar-tab ${sidebarTab === 'participants' ? 'active' : ''}`} onClick={() => setSidebarTab('participants')}>
+                                Participants ({students.length})
+                            </button>
                         </div>
 
-                        {sidebarTab === 'participants' ? (
+                        {sidebarTab === 'chat' ? (
+                            <ChatPanel messages={messages} onSend={sendMessage} senderName="Teacher" />
+                        ) : (
                             <div className="participants-list">
                                 {students.length === 0 ? (
                                     <p className="no-students">Waiting for students to join...</p>
@@ -166,8 +168,6 @@ export default function TeacherView() {
                                     ))
                                 )}
                             </div>
-                        ) : (
-                            <ChatPanel messages={messages} onSend={sendMessage} senderName="Teacher" />
                         )}
                     </aside>
                 </div>

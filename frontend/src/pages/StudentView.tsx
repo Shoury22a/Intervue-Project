@@ -121,8 +121,7 @@ export default function StudentView() {
                         <div className="spinner-container">
                             <div className="spinner"></div>
                         </div>
-                        <h2>Wait for the teacher to ask a question...</h2>
-                        <p>You'll be notified when a poll starts</p>
+                        <h2>Wait for the teacher to ask questions..</h2>
                         <div className={`conn-status ${connected ? 'online' : 'offline'}`}>
                             {connected ? '🟢 Connected' : '🔴 Connecting...'}
                         </div>
@@ -155,7 +154,7 @@ export default function StudentView() {
                         ) : (
                             <div className="options-grid">
                                 {activePoll.options.map((option, idx) => {
-                                    const labels = ['A', 'B', 'C', 'D', 'E', 'F'];
+                                    const labels = ['1', '2', '3', '4', '5', '6'];
                                     return (
                                         <button
                                             key={idx}
