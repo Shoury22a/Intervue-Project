@@ -46,8 +46,8 @@ class PollService {
         const votedStudents = votes.map((v) => v.studentName);
 
         // Rebuild options with live vote counts
-        const optionsWithVotes = poll.options.map((opt, idx) => ({
-            ...opt.toObject(),
+        const optionsWithVotes = poll.options.map((opt: any, idx) => ({
+            ...(typeof opt.toObject === 'function' ? opt.toObject() : opt),
             votes: votes.filter((v) => v.optionIndex === idx).length,
         }));
 
